@@ -1,0 +1,195 @@
+Write a SQL statement to rename the table countries to country_new.
+Here is the list of tables. tablename | tableowner
+---------------+------------
+orders | postgres
+employees | postgres
+job_history | postgres
+jobs | postgres
+locations | postgres
+regions | postgres
+countries | postgres
+
+
+
+Write a SQL statement to add a column region_id to the table locations.
+Here is the structure of the table locations.
+postgres=# \d locations
+Column | Type | Modifiers
+----------------+-----------------------+----------- 
+ location_id | numeric(4,0) | 
+ street_address | character varying(40) | 
+ postal_code | character varying(12) | 
+ city | character varying(30) | 
+ state_province | character varying(25) |
+ country_id | character varying(2) |
+
+
+
+Write a SQL statement to change the data type of the column region_id to text in the table locations.
+
+
+Write a SQL statement to drop the column city from the table locations.
+
+
+Write a SQL statement to add a primary key for the columns location_id in the locations table.
+Here is the structure of the table locations.
+postgres=# \d locations
+Column | Type | Modifiers
+----------------+-----------------------+----------- 
+ location_id | numeric(4,0) | 
+ street_address | character varying(40) | 
+ postal_code | character varying(12) | 
+ city | character varying(30) | 
+ state_province | character varying(25) | 
+ country_id | character varying(2) |
+ 
+ 
+ Answers:
+ Q.1) 
+create table countries(
+dbda_lab(# "country_ID" integer primary key,
+dbda_lab(# "country_name" char(20),
+dbda_lab(# "region_ID" integer);
+CREATE TABLE
+
+ insert into countries values('1020','INDIA','INDA765'),('1030','England','EN675'),('1040','USA','1040');
+INSERT 0 3
+
+dbda_lab=# select * from countries;
+ country_ID |     country_name     | region_ID
+------------+----------------------+-----------
+       1020 | INDIA                | INDA765
+       1030 | England              | EN675
+       1040 | USA                  | 1040
+dbda_lab=# ALTER TABLE countries RENAME to country_new ;
+ALTER TABLE
+dbda_lab=# \d
+            List of relations
+ Schema |    Name     | Type  |  Owner
+--------+-------------+-------+----------
+ public | company     | table | postgres
+ public | country_new | table | postgres
+(2 rows)
+
+
+
+Write a SQL statement to add a column region_id to the table locations.
+Here is the structure of the table locations.
+postgres=# \d locations
+Column | Type | Modifiers
+----------------+-----------------------+----------- 
+ location_id | numeric(4,0) | 
+ street_address | character varying(40) | 
+ postal_code | character varying(12) | 
+ city | character varying(30) | 
+ state_province | character varying(25) |
+ country_id | character varying(2) |
+
+
+Q2)  dbda_lab=# create table locations(
+dbda_lab(# location_ID numeric(4,0),
+dbda_lab(# street_address varchar(40),
+dbda_lab(# postal_code varchar(12),
+dbda_lab(# city varchar(30),
+dbda_lab(# state_province varchar(25),
+dbda_lab(# country_ID varchar(2)
+dbda_lab(# );
+CREATE TABLE
+
+
+ 
+
+
+
+
+alter table locations add column region_ID varchar(20);
+ALTER TABLE
+dbda_lab=# \d locations
+                        Table "public.locations"
+     Column     |         Type          | Collation | Nullable | Default
+----------------+-----------------------+-----------+----------+---------
+ location_id    | numeric(4,0)          |           |          |
+ street_address | character varying(40) |           |          |
+ postal_code    | character varying(12) |           |          |
+ city           | character varying(30) |           |          |
+ state_province | character varying(25) |           |          |
+ country_id     | character varying(2)  |           |          |
+ region_id      | character varying(20) |           |          |
+
+
+
+                                  ^
+dbda_lab=# alter table locations alter column region_ID type text;
+ALTER TABLE
+dbda_lab=# \d locations
+                        Table "public.locations"
+     Column     |         Type          | Collation | Nullable | Default
+----------------+-----------------------+-----------+----------+---------
+ location_id    | numeric(4,0)          |           |          |
+ street_address | character varying(40) |           |          |
+ postal_code    | character varying(12) |           |          |
+ city           | character varying(30) |           |          |
+ state_province | character varying(25) |           |          |
+ country_id     | character varying(2)  |           |          |
+ region_id      | text                  |           |          |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Write a SQL statement to change the data type of the column region_id to text in the table locations.
+dbda_lab=# alter table locations drop column city;
+ALTER TABLE
+dbda_lab=# \d locations
+                        Table "public.locations"
+     Column     |         Type          | Collation | Nullable | Default
+----------------+-----------------------+-----------+----------+---------
+ location_id    | numeric(4,0)          |           |          |
+ street_address | character varying(40) |           |          |
+ postal_code    | character varying(12) |           |          |
+ state_province | character varying(25) |           |          |
+ country_id     | character varying(2)  |           |          |
+ region_id      | text                  |           |          |
+
+
+Write a SQL statement to drop the column city from the table locations.
+
+dbda_lab=# alter table locations drop column city;
+ALTER TABLE
+dbda_lab=# \d locations
+                        Table "public.locations"
+     Column     |         Type          | Collation | Nullable | Default
+----------------+-----------------------+-----------+----------+---------
+ location_id    | numeric(4,0)          |           |          |
+ street_address | character varying(40) |           |          |
+ postal_code    | character varying(12) |           |          |
+ state_province | character varying(25) |           |          |
+ country_id     | character varying(2)  |           |          |
+ region_id      | text                  |           |          |
+
+Write a SQL statement to add a primary key for the columns location_id in the locations table.
+
+dbda_lab=# alter table locations add primary key (location_ID);
+ALTER TABLE
+dbda_lab=# \d locations
+                        Table "public.locations"
+     Column     |         Type          | Collation | Nullable | Default
+----------------+-----------------------+-----------+----------+---------
+ location_id    | numeric(4,0)          |           | not null |
+ street_address | character varying(40) |           |          |
+ postal_code    | character varying(12) |           |          |
+ state_province | character varying(25) |           |          |
+ country_id     | character varying(2)  |           |          |
+ region_id      | text                  |           |          |
+Indexes:
+    "locations_pkey" PRIMARY KEY, btree (location_id)
+
