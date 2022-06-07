@@ -1,0 +1,117 @@
+
+Write a SQL statement to create a simple table countries including columns country_id, country_name and region_id which already exist.
+
+Write a SQL statement to create a simple table countries including columns country_id,country_name and region_id.
+
+Write a SQL statement to create the structure of a table dup_countries similar to countries.
+
+Write a SQL statement to create a duplicate copy of countries table including structure and data by name dup_countries.
+
+
+Write a SQL statement to create a table named countries, including country_id, country_name and region_id and make sure that no duplicate data against column country_id will be allowed at the time of insertion.
+Q5 )
+
+dbda_lab=# create table if not exists countries(
+dbda_lab(# country_ID integer not null primary key,
+dbda_lab(# country_name char(20) not null,
+dbda_lab(# region_ID varchar(30) not null
+dbda_lab(# );
+NOTICE:  relation "countries" already exists, skipping
+CREATE TABLE
+
+dbda_lab=# \d countries
+                       Table "public.countries"
+    Column    |         Type          | Collation | Nullable | Default 
+--------------+-----------------------+-----------+----------+---------
+ country_ID   | integer               |           | not null | 
+ country_name | character(20)         |           |          | 
+ region_ID    | character varying(30) |           |          | 
+Indexes:
+    "countries_pkey" PRIMARY KEY, btree ("country_ID")
+
+
+Q2 ) 
+
+dbda_lab=# create table countries(
+"country_ID" integer primary key,
+"country_name" char(20),
+"region_ID" integer);
+CREATE TABLE
+dbda_lab=# \d countries
+                   Table "public.countries"
+    Column    |     Type      | Collation | Nullable | Default 
+--------------+---------------+-----------+----------+---------
+ country_ID   | integer       |           | not null | 
+ country_name | character(20) |           |          | 
+ region_ID    | integer       |           |          | 
+Indexes:
+    "countries_pkey" PRIMARY KEY, btree ("country_ID")
+
+Q 1) 
+create table if not exists countries(
+country_ID integer primary key,
+country_name char(20),
+region_ID varchar(30));
+NOTICE:  relation "countries" already exists, skipping
+CREATE TABLE
+
+Q 3)
+
+bda_lab=# create table dup_countries as select * from countries;
+SELECT 0
+dbda_lab=# \d
+             List of relations
+ Schema |     Name      | Type  |  Owner   
+--------+---------------+-------+----------
+ public | countries     | table | postgres
+ public | country       | table | postgres
+ public | dif           | table | postgres
+ public | dup_countries | table | postgres
+(4 rows)
+
+
+Q4 )
+
+bda_lab=# insert into countries("country_ID", "country_name", "region_ID")
+values ('1020', 'INDIA', 'IND765'),
+('1030', 'ENGLAND', 'END675'),
+('1040','USA','U567');
+INSERT 0 3
+dbda_lab=# \d ountries
+Did not find any relation named "ountries".
+dbda_lab=# \d countries
+                       Table "public.countries"
+    Column    |         Type          | Collation | Nullable | Default 
+--------------+-----------------------+-----------+----------+---------
+ country_ID   | integer               |           | not null | 
+ country_name | character(20)         |           |          | 
+ region_ID    | character varying(30) |           |          | 
+Indexes:
+    "countries_pkey" PRIMARY KEY, btree ("country_ID")
+
+dbda_lab=# select * from countries
+dbda_lab-# ;
+ country_ID |     country_name     | region_ID 
+------------+----------------------+-----------
+       1020 | INDIA                | IND765
+       1030 | ENGLAND              | END675
+       1040 | USA                  | U567
+(3 rows)
+
+dbda_lab=# create table dup_countries as select * from countries;
+SELECT 3
+dbda_lab=# \d dup_countries
+                     Table "public.dup_countries"
+    Column    |         Type          | Collation | Nullable | Default 
+--------------+-----------------------+-----------+----------+---------
+ country_ID   | integer               |           |          | 
+ country_name | character(20)         |           |          | 
+ region_ID    | character varying(30) |           |          | 
+
+dbda_lab=# select * from dup_countries;
+ country_ID |     country_name     | region_ID 
+------------+----------------------+-----------
+       1020 | INDIA                | IND765
+       1030 | ENGLAND              | END675
+       1040 | USA                  | U567
+(3 rows)
