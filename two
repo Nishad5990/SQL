@@ -1,0 +1,73 @@
+Write a SQL statement to create a table named jobs including columns job_id, job_title, min_salary and max_salary, 
+and make sure that, the default value for job_title is blank and min_salary is 8000 and max_salary is NULL will be 
+entered automatically at the time of insertion if no value assigned for the specified columns.
+
+
+Write a SQL statement to create and insert a record into the table countries to ensure that, at country_id and the 
+egion_id combination will be entered once in the table.
+
+
+Write a SQL statement to create and insert records into the table countries to ensure that the country_id column 
+will not contain any duplicate data and this will be automatically incremented and the column country_name will be filled up by 'N/A' if no value assigned to that column.
+
+
+answers :
+
+Assign 2 
+
+Q 1)\
+
+Create table jobs(
+            	job_id serial,
+            	job_title varchar(20) default null,
+            	min_salary float default 8000,
+            	max_salary float default null)
+ 
+;
+ 
+select * from jobs;
+ 
+ job_id | job_title | min_salary | max_salary
+--------+-----------+------------+------------
+      1 | manager   |   	8200 |  	16000
+(1 row)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q2 )
+create table countries(
+            	country_id varchar(6) primary key,
+            	region_id  varchar(6) UNIQUE
+)
+;
+ 
+insert into countries(country_id,region_id) values(001,400079),(001,400086);
+ 
+ERROR: duplicate key value violates unique constraint "countries_pkey" DETAIL: Key (country_id)=(1) already exists. SQL state: 23505
+ 
+ 
+insert into countries(country_id,region_id) values(001,400079),(002,400086);
+ country_id | region_id
+------------+-----------
+ 1          | 400079
+ 2          | 400086
+Q 3)
+
+ 
+create table country(
+            	country_id serial unique,
+            	country_name varchar(20) default 'N/A'
+);
+ 
+
