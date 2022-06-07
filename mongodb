@@ -1,0 +1,212 @@
+1. Install MongoDB database server
+2. Create a directory/folder to store MongoDB datafiles
+3. Set necessary path environment variable
+4. Startup MongoDB database
+5. Connect to MongoDB database through the MongoDB shell command line interface
+6. View list of available databases
+7. Create a new database named CDAC and connect to it
+8. View list of available collections in CDAC database
+9. Create a new collection by the name of LIBRARY
+10. Insert the following document in the LIBRARY collection:-
+title:'MongoDB programming', author:'Sameer', likes:100
+11. View the recently inserted document and note the _id field
+12. Insert another document in the LIBRARY collection as follows:-
+title:'MySQL programming', authors:['Jack','Jill'], likes:200
+13. View the inserted documents
+14. View only the first inserted document
+15. View the documents using the pretty() method
+16. Update the document where author name = Sameer and change it to Sameer Dehadrai
+17. Delete all documents that have 100 likes
+18. Drop the LIBRARY collection
+19. Drop the CDAC database
+20. Exit from MongoDB shell
+21. Stop MongoDB server
+
+
+Q 3.)
+Microsoft Windows [Version 10.0.22000.613]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Program Files\MongoDB\Server\mongosh-1.3.1-win32-x64>
+
+
+Q 4)\Q 5)
+ C:\Program Files\MongoDB\Server\mongosh-1.3.1-win32-x64\bin>mongosh "mongodb+srv://cluster0.cby1s.mongodb.net/myFirstDatabase" --apiVersion 1 --username nishad_dbda
+Enter password: ********
+Current Mongosh Log ID: 625e8aa781f3041bb275560b
+Connecting to:          mongodb+srv://cluster0.cby1s.mongodb.net/myFirstDatabase?appName=mongosh+1.3.1
+Using MongoDB:          5.0.7 (API Version 1)
+Using Mongosh:          1.3.1
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+Warning: Found ~/.mongorc.js, but not ~/.mongoshrc.js. ~/.mongorc.js will not be loaded.
+  You may want to copy or rename ~/.mongorc.js to ~/.mongoshrc.js.
+Atlas atlas-hrg6c2-shard-0 [primary] myFirstDatabase>
+
+
+Q/6)
+
+Atlas atlas-hrg6c2-shard-0 [primary] myFirstDatabase> show databases;
+myFirstDatabase  156 kB
+admin            344 kB
+local            2.6 GB
+Atlas atlas-hrg6c2-shard-0 [primary] myFirstDatabase>
+
+
+	Q 7) 
+
+Atlas atlas-hrg6c2-shard-0 [primary] myFirstDatabase> show dbs;
+CDAC             8.19 kB
+
+
+Atlas atlas-hrg6c2-shard-0 [primary] myFirstDatabase> use cdac;
+switched to db cdac
+Atlas atlas-hrg6c2-shard-0 [primary] cdac>
+
+Q8 ,9) 
+Atlas atlas-hrg6c2-shard-0 [primary] CDAC> show tables;
+Library
+Atlas atlas-hrg6c2-shard-0 [primary] CDAC>
+
+
+Q 10 )
+Atlas atlas-hrg6c2-shard-0 [primary] CDAC> db.Library.insert({title: 'MongoDB programming', authore: 'Sameer', likes: 100})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("625e8f3e11a8febcaded2e7d") }
+}
+Atlas atlas-hrg6c2-shard-0 [primary] CDAC> db.Library.find()
+[
+  {
+    _id: ObjectId("625e8f3e11a8febcaded2e7d"),
+    title: 'MongoDB programming',
+    authore: 'Sameer',
+    likes: 100
+  }
+
+Q 11)  
+
+
+
+Atlas atlas-hrg6c2-shard-0 [primary] CDAC> db.Library.find()
+[
+  {
+    _id: ObjectId("625e8f3e11a8febcaded2e7d"),
+
+
+
+
+
+
+Q12.) /Q13) 
+Atlas atlas-hrg6c2-shard-0 [primary] CDAC> db.Library.insert({title: 'MySql programming', authors: 'jack,jill', likes: 200})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("625e900511a8febcaded2e7e") }
+}
+
+View
+Atlas atlas-hrg6c2-shard-0 [primary] CDAC> db.Library.find()
+[
+  {
+    _id: ObjectId("625e8f3e11a8febcaded2e7d"),
+    title: 'MongoDB programming',
+    authore: 'Sameer',
+    likes: 100
+  },
+  {
+    _id: ObjectId("625e900511a8febcaded2e7e"),
+    title: 'MySql programming',
+    authors: 'jack,jill',
+    likes: 200
+  }
+]
+
+ Q.14) 
+
+Atlas atlas-hrg6c2-shard-0 [primary] CDAC> db.Library.find({title:'MongoDB programming'})
+[
+  {
+    _id: ObjectId("625e8f3e11a8febcaded2e7d"),
+    title: 'MongoDB programming',
+    authore: 'Sameer',
+    likes: 100
+  }
+) 
+Q 15) 
+
+Atlas atlas-hrg6c2-shard-0 [primary] CDAC> db.Library.find().pretty()
+[
+  {
+    _id: ObjectId("625e8f3e11a8febcaded2e7d"),
+    title: 'MongoDB programming',
+    authore: 'Sameer',
+    likes: 100
+  },
+  {
+    _id: ObjectId("625e900511a8febcaded2e7e"),
+    title: 'MySql programming',
+    authors: 'jack,jill',
+    likes: 200
+  }
+]
+
+Q 16) 
+Atlas atlas-hrg6c2-shard-0 [primary] CDAC> db.Library.update({authore: 'Sameer'},{$set:{authore:'Sammer Dehadrai'}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-hrg6c2-shard-0 [primary] CDAC> db.Library.find()
+[
+  {
+    _id: ObjectId("625e8f3e11a8febcaded2e7d"),
+    title: 'MongoDB programming',
+    authore: 'Sammer Dehadrai',
+    likes: 100
+  },
+
+
+
+
+Q17) 
+
+
+Atlas atlas-hrg6c2-shard-0 [primary] CDAC> db.Library.deleteMany({likes:100})
+{ acknowledged: true, deletedCount: 1 }
+Atlas atlas-hrg6c2-shard-0 [primary] CDAC> db.Library.find()
+[
+  {
+    _id: ObjectId("625e900511a8febcaded2e7e"),
+    title: 'MySql programming',
+    authors: 'jack,jill',
+    likes: 200
+  }
+]
+
+
+Q 18) 
+Atlas atlas-hrg6c2-shard-0 [primary] CDAC> db.Library.drop()
+true
+Atlas atlas-hrg6c2-shard-0 [primary] CDAC> db.Library.find()
+
+Atlas atlas-hrg6c2-shard-0 [primary] CDAC>
+
+
+Q 19) 
+
+Atlas atlas-hrg6c2-shard-0 [primary] CDAC> db.CDAC.drop()
+true
+Atlas atlas-hrg6c2-shard-0 [primary] CDAC> show dbs;
+myFirstDatabase  156 kB
+admin            344 kB
+local            2.6 GB
+
+
+
+
+
